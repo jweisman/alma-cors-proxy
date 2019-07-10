@@ -1,0 +1,11 @@
+{
+  "name": "Alma API CORS Proxy",
+  "description": "Simple nginx proxy to add CORS headers for requests to the Ex Libris Alma REST APIs.",
+  "repository": "https://github.com/jweisman/alma-cors-proxy",
+  "env": {
+    "ALMA_API_KEY": {
+      "description": "Alma API Key."
+    }
+  },
+  "stack": "container"
+}

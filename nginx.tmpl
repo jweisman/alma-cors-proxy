@@ -1,0 +1,32 @@
+### proxy to Gateway, adding CORS 
+events { }
+
+http {
+  server {
+    listen $PORT; 
+    server_name proxy_to_gw; 
+    location / {
+      if ($request_method = 'OPTIONS') {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS'; 
+        add_header 'Access-Control-Allow-Headers' 'Origin,Accept,Content-Type'; 
+        add_header 'Access-Control-Max-Age' 1728000;
+        add_header 'Content-Type' 'text/plain charset=UTF-8';
+        add_header 'Content-Length' 0;
+        return 204;
+      } 
+      if ($request_method = 'GET') {
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'Origin,Accept,Content-Type';
+      } 
+      proxy_pass https://api-na.hosted.exlibrisgroup.com;
+      proxy_set_header Host $host;
+      proxy_set_header Authorization "apikey ${ALMA_API_KEY}"; 
+      proxy_set_header Accept "application/json";
+      proxy_set_header X-Real-IP $remote_addr;
+    }  
+  }
+}
