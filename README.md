@@ -10,7 +10,7 @@ Simple nginx proxy to add CORS headers for requests to the Ex Libris Alma REST A
 
 `$ docker run --name alma-proxy -p 5555:5555 -e ALMA_API_KEY=l7xx.... -e PORT=5555 --rm -it alma-proxy`
 
-Then visit http://localhost/almaws/v1/users
+Then visit http://localhost:5555/almaws/v1/users
 
 ### Deploy to Heroku
 
